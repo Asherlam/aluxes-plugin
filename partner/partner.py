@@ -1,13 +1,13 @@
 import discord
 from discord.ext import commands
 
-from core.checks import has_permissions
+from core import checks
 from core.models import PermissionLevel
 
 
 class Partner(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
+	def __init__(self, bot):
+    	self.bot = bot 
 
 	@commands.group(invoke_without_command=True)
 	@has_permissions(PermissionLevel.Owner)
@@ -32,6 +32,7 @@ class Partner(commands.Cog):
 			embed.add_field(name="What We Offer", value="Advertising\nGames\nPremium-Advertising\nReactionRoles\nPartnerships\nGiveaways\nSFW-Community\nFriendly-Channels\n\nThis server is meant for entertainment and relaxation. Please join and earn rewards for being active, inviting friends and more as we cannot wait to here from you! https://discord.gg/bAgVPdw https://media1.giphy.com/media/35B3Val0pYgtpScqsz/giphy.gif", inline=False)
 			
 			parnterid = await ctx.send(embed=embed)
+			
 			await self.db.insert_one(
 				{
 					"id": message.channel.guild,
