@@ -24,7 +24,7 @@ class Partner(commands.Cog):
         if ctx.author.bot:
           return
 
-        server = await self.db.find_one({"id": message.channel.guild})
+        server = await self.db.find_one({"id": ctx.channel.guild})
 
         if server is None:
         
