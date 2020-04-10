@@ -91,7 +91,6 @@ class Leveling(Cog):
         if stats is None:
             embed = Embed(
                 title="Leveling",
-                url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
                 description=f"User {user.name} hasn't sent a single message here.",
                 color=self.bot.main_color,
             )
@@ -100,7 +99,6 @@ class Leveling(Cog):
 
         embed = Embed(
             title="Leveling",
-            url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
             description=f"{user.name} is level "
             + str(stats["level"])
             + " and has "
@@ -126,7 +124,6 @@ class Leveling(Cog):
             
             embed = Embed(
                 title="Leveling",
-                url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
                 description=f"The amount of gold given per message is {amount}.",
                 color=self.bot.main_color,
             )
@@ -138,7 +135,6 @@ class Leveling(Cog):
         except ValueError:
             embed = Embed(
                 title="Leveling",
-                url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
                 description="That doesn't look like a valid number.",
                 color=self.bot.main_color,
             )
@@ -148,7 +144,6 @@ class Leveling(Cog):
         if amount < 1:
             embed = Embed(
                 title="Leveling",
-                url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
                 description="I can't give negative gold.",
                 color=self.bot.main_color,
             )
@@ -161,7 +156,6 @@ class Leveling(Cog):
             await self.db.insert_one({"_id": "leveling-config", "amount_per_message": amount})
             embed = Embed(
                 title="Leveling",
-                url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
                 description=f"I set the amount of gold given to {amount}.",
                 color=self.bot.main_color,
             )
@@ -171,7 +165,6 @@ class Leveling(Cog):
             )
             embed = Embed(
                 title="Leveling",
-                url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
                 description=f"I updated the amount of gold given to {amount}.",
                 color=self.bot.main_color,
             )
@@ -188,7 +181,6 @@ class Leveling(Cog):
         embed = Embed(
             title="Leaderboard for " + ctx.guild.name,
             colour=self.bot.main_color,
-            url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
         )
 
         for user in await users.to_list(length=11):
@@ -209,7 +201,6 @@ class Leveling(Cog):
         except ValueError:
             embed = Embed(
                 title="Leveling",
-                url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
                 description="That doesn't look like a valid number.",
                 color=self.bot.main_color,
             )
@@ -219,7 +210,6 @@ class Leveling(Cog):
         if amount < 1:
             embed = Embed(
                 title="Leveling",
-                url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
                 description="I can't give negative gold.",
                 color=self.bot.main_color,
             )
@@ -231,7 +221,6 @@ class Leveling(Cog):
         if stats is None:
             embed = Embed(
                 title="Leveling",
-                url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
                 description=f"User {user.name} hasn't sent a single message here.",
                 color=self.bot.main_color,
             )
@@ -244,7 +233,6 @@ class Leveling(Cog):
 
         embed = Embed(
             title="Leveling",
-            url="https://github.com/papiersnipper/modmail-plugins/blob/master/leveling",
             description=f"I gave {amount} gold to {user.name}",
             color=self.bot.main_color,
         )
