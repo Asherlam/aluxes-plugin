@@ -1,28 +1,26 @@
-from discord import Embed, Message, User
-from discord.ext.commands import Bot, Cog, Context, group
+import discord
+from discord.ext import commands
 
 from core.checks import has_permissions
 from core.models import PermissionLevel
 
 
-class Partner(Cog):
-
-    def __init__(self, bot: Bot) -> None:
+class Partner(commands.Cog):
+    def __init__(self, bot):
         self.bot = bot
-        self.db: AsyncIOMotorCollection = bot.plugin_db.get_partition(self)
 
-	@group.command()
+	@commands.group(invoke_without_command=True)
 	@has_permissions(PermissionLevel.Owner)
-	async def parnter(self, ctx: Context) -> None:
+	async def parnter(self, ctx: Context):
 		"""
         Settings and stuff
         """
         await ctx.send_help(ctx.command)
         return
 
-	@parnter.command(name="setup")
+	@parnter.command()
 	@has_permissions(PermissionLevel.Owner)
-	async def setup(self, ctx: Context) -> None:
+	async def setup(self, ctx: Context):
 		if message.author.bot:
 			return
 
@@ -48,5 +46,5 @@ class Partner(Cog):
 			await ctx.send(embed=embed)
 
 
-def setup(bot: Bot) -> None:
-    bot.add_cog(Partner(bot))
+def setup(bot):
+	bot.add_cog(Partner(bot))
