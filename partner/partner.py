@@ -11,7 +11,7 @@ class Partner(commands.Cog):
 
     @commands.group(invoke_without_command=True)
     @checks.has_permissions(PermissionLevel.OWNER)
-    async def parnter(self, ctx: Context):
+    async def parnter(self, ctx):
         """
         Settings and stuff
         """
@@ -20,7 +20,7 @@ class Partner(commands.Cog):
 
     @parnter.command()
     @checks.has_permissions(PermissionLevel.OWNER)
-    async def setup(self, ctx: Context):
+    async def setup(self, ctx):
         if message.author.bot:
           return
 
