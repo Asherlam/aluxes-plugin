@@ -5,14 +5,15 @@ from core.checks import has_permissions
 from core.models import PermissionLevel
 
 
-class Partner(commands.Cog):
+class Partner(Cog):
 
     def __init__(self, bot: Bot) -> None:
         self.bot = bot
         self.db: AsyncIOMotorCollection = bot.plugin_db.get_partition(self)
 
 	@group(name="parnter", invoke_without_command=True)
-	async def parnter(self, ctx: Context):
+	@has_permissions(PermissionLevel.Owner)
+	async def parnter(self, ctx: Context) -> None:
 		"""
         Settings and stuff
         """
@@ -20,7 +21,8 @@ class Partner(commands.Cog):
         return
 
 	@parnter.command(name="setup")
-	async def setup(self, ctx: Context):
+	@has_permissions(PermissionLevel.Owner)
+	async def setup(self, ctx: Context) -> None:
 		if message.author.bot:
 			return
 
@@ -46,5 +48,5 @@ class Partner(commands.Cog):
 			await ctx.send(embed=embed)
 
 
-def setup(bot):
-	bot.add_cog(Parnter(bot))
+def setup(bot: Bot) -> None:
+    bot.add_cog(Partner(bot))
