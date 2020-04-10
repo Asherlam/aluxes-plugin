@@ -11,7 +11,7 @@ class Partner(commands.Cog):
         self.bot = bot
         self.db: AsyncIOMotorCollection = bot.plugin_db.get_partition(self)
 
-	@commands.group(invoke_without_command=True):
+	@commands.group(invoke_without_command=True)
 	async def parnter(self, ctx: commands.Context):
 		"""
         Settings and stuff
@@ -19,7 +19,7 @@ class Partner(commands.Cog):
         await ctx.send_help(ctx.command)
         return
 
-	@parnter.command():
+	@parnter.command()
 	async def setup(self, ctx: commands.Context):
 		if message.author.bot:
 			return
