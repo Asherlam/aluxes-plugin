@@ -6,8 +6,8 @@ from core.models import PermissionLevel
 
 
 class Partner(commands.Cog):
-	  def __init__(self, bot):
-    	  self.bot = bot 
+    def __init__(self, bot):
+        self.bot = bot
 
     @commands.group(invoke_without_command=True)
     @has_permissions(PermissionLevel.Owner)
