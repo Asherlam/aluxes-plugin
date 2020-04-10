@@ -5,7 +5,7 @@ from core import checks
 from core.models import PermissionLevel
 
 
-class Partner(command.Cog):
+class Partner(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
