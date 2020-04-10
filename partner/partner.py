@@ -11,7 +11,7 @@ class Partner(Cog):
         self.bot = bot
         self.db: AsyncIOMotorCollection = bot.plugin_db.get_partition(self)
 
-	@group(name="parnter", invoke_without_command=True)
+	@group.command()
 	@has_permissions(PermissionLevel.Owner)
 	async def parnter(self, ctx: Context) -> None:
 		"""
