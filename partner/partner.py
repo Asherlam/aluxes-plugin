@@ -21,7 +21,7 @@ class Partner(commands.Cog):
     @parnter.command()
     @checks.has_permissions(PermissionLevel.OWNER)
     async def setup(self, ctx):
-        if message.author.bot:
+        if ctx.author.bot:
           return
 
         server = await self.db.find_one({"id": message.channel.guild})
@@ -35,9 +35,9 @@ class Partner(commands.Cog):
             
             await self.db.insert_one(
               {
-                "id": message.channel.guild,
-                "name": message.author.name,
-                "channelid": message.channel.id,
+                "id": ctx.channel.guild,
+                "name": ctx.author.name,
+                "channelid": ctx.channel.id,
                 "messageid": parnterid,
               })
 
