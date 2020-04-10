@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+from discord import Embed, Message, User
+from discord.ext.commands import Bot, Cog, Context, group
 
 from core.checks import has_permissions
 from core.models import PermissionLevel
