@@ -44,6 +44,7 @@ class Partner(commands.Cog):
             return await ctx.send("There's no configured partner channel.")
         else:
             channel = ctx.guild.get_channel(int(channel_config["channel"]))
+            guild = ctx.guild.get_channel(int(channel_config["guild"]))
         
         if channel is None:
             return await ctx.send("Can't find Partner Channel!")
@@ -52,6 +53,21 @@ class Partner(commands.Cog):
 
         if partner is None:
             partner = await self.db.insert_one({"id": "partner"})
+
+        embed=discord.Embed(description=f"Welcome to the Aluxes Partner setup menu!", color=0x950EE7)
+        embed.add_field(name="Setting Your Partner Channel", value=f"Please enter a channel you would like to send a Aluxes Partner Message in\nThis can be done by using the `#` key and entering the channel name directly after it without a space. Make sure your channel is visible to everyone on the server", inline=False)
+        await ctx.send(embed=embed)
+
+        channel: discord.Message = await self.bot.wait_for("message", check=check)
+        if cancel_check(channel) is True:
+            await ctx.send("Cancelled!")
+            return
+        else:
+            if channel.channel_mentions[0] is None:
+                await ctx.send("Cancelled as no channel was provided")
+                return
+            else:
+                schan = channel.channel_mentions[0]
 
         try:
             partnerid = partner[str(ctx.channel.guild.id)]
