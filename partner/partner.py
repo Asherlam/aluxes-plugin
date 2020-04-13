@@ -11,8 +11,8 @@ class Partner(commands.Cog):
         self.db = bot.plugin_db.get_partition(self)
 
     @commands.group(invoke_without_command=True)
-    @checks.has_permissions(PermissionLevel.OWNER)
-    async def parnter(self, ctx):
+    @checks.has_permissions(PermissionLevel.Owner)
+    async def partner(self, ctx: commands.Context):
         """
         Settings and stuff
         """
