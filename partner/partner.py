@@ -56,14 +56,14 @@ class Partner(commands.Cog):
         try:
             partnerid = partner[int(ctx.message.guild.id)]
         except KeyError:
+            partnerid = partner[int(ctx.message.guild.id)] = []
+
+        if partnerid is None:
             embed=discord.Embed(title="Aluxes", url="https://discord.gg/ugyxpnC", description="A Relaxing Chill Community!")
             embed.add_field(name="What We Offer", value="Advertising\nGames\nPremium-Advertising\nReactionRoles\nPartnerships\nGiveaways\nSFW-Community\nFriendly-Channels\n\nThis server is meant for entertainment and relaxation. Please join and earn rewards for being active, inviting friends and more as we cannot wait to here from you! https://discord.gg/bAgVPdw https://media1.giphy.com/media/35B3Val0pYgtpScqsz/giphy.gif", inline=False)
             await ctx.send(embed=embed)
-
-        if partnerid is None:
-            newpartner = []
         else:
-            await ctx.send("f{partnerid}")
+            await ctx.send("You are our partner already!")
 
         newpartner.append({"guildid": ctx.message.guild.id})
 
