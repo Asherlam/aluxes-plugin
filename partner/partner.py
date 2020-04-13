@@ -11,15 +11,15 @@ class Partner(commands.Cog):
         self.db = bot.plugin_db.get_partition(self)
 
     @commands.group(invoke_without_command=True)
-    @checks.has_permissions(PermissionLevel.Owner)
-    async def partner(self, ctx: commands.Context):
+    @checks.has_permissions(PermissionLevel.OWNER)
+    async def partner(self, ctx):
         """
         Settings and stuff
         """
         await ctx.send_help(ctx.command)
         return
 
-    @parnter.command()
+    @partner.command()
     @checks.has_permissions(PermissionLevel.OWNER)
     async def channel(self, ctx, channel: discord.TextChannel):
         """
@@ -33,7 +33,7 @@ class Partner(commands.Cog):
             await ctx.send("Partner Channel Set")
             return 
 
-    @parnter.command()
+    @partner.command()
     @checks.has_permissions(PermissionLevel.OWNER)
     async def setup(self, ctx):
         if ctx.author.bot:
@@ -56,7 +56,7 @@ class Partner(commands.Cog):
             embed=discord.Embed(title="Aluxes", url="https://discord.gg/ugyxpnC", description="A Relaxing Chill Community!")
             embed.add_field(name="What We Offer", value="Advertising\nGames\nPremium-Advertising\nReactionRoles\nPartnerships\nGiveaways\nSFW-Community\nFriendly-Channels\n\nThis server is meant for entertainment and relaxation. Please join and earn rewards for being active, inviting friends and more as we cannot wait to here from you! https://discord.gg/bAgVPdw https://media1.giphy.com/media/35B3Val0pYgtpScqsz/giphy.gif", inline=False)
             
-            parnterid = await ctx.send(embed=embed)
+            partnerid = await ctx.send(embed=embed)
             
             await self.db.insert_one(
               {
@@ -64,7 +64,7 @@ class Partner(commands.Cog):
                 "name": ctx.author.name,
                 "guildid": ctx.channel.guild,
                 "channelid": ctx.channel.id,
-                "messageid": parnterid,
+                "messageid": partnerid,
               })
 
         else:
