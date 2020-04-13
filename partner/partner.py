@@ -54,9 +54,9 @@ class Partner(commands.Cog):
             partner = await self.db.insert_one({"id": "partner"})
 
         try:
-            partnerid = partner[int(ctx.message.guild.id)]
+            partnerid = partner[str(ctx.channel.guild.id)]  
         except KeyError:
-            partnerid = partner[int(ctx.message.guild.id)] = []
+            partnerid = partner[str(ctx.channel.guild.id)] = []
 
         if partnerid is None:
             embed=discord.Embed(title="Aluxes", url="https://discord.gg/ugyxpnC", description="A Relaxing Chill Community!")
@@ -64,8 +64,6 @@ class Partner(commands.Cog):
             await ctx.send(embed=embed)
         else:
             await ctx.send("You are our partner already!")
-
-        newpartner.append({"guildid": ctx.message.guild.id})
 
     @partner.command()
     @checks.has_permissions(PermissionLevel.OWNER)
