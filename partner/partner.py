@@ -48,28 +48,58 @@ class Partner(commands.Cog):
         if channel is None:
             return await ctx.send("Can't find Partner Channel!")
 
-        server = await self.db.find_one({"guildid": ctx.channel.guild})
+        partner = await self.db.find_one({"_id": "partner"})
 
-        if server is None:
-        
-            embed=discord.Embed(title="Aluxes", url="https://discord.gg/ugyxpnC", description="A Relaxing Chill Community!")
-            embed.add_field(name="What We Offer", value="Advertising\nGames\nPremium-Advertising\nReactionRoles\nPartnerships\nGiveaways\nSFW-Community\nFriendly-Channels\n\nThis server is meant for entertainment and relaxation. Please join and earn rewards for being active, inviting friends and more as we cannot wait to here from you! https://discord.gg/bAgVPdw https://media1.giphy.com/media/35B3Val0pYgtpScqsz/giphy.gif", inline=False)
-            
-            partnerid = await ctx.send(embed=embed)
-            
-            await self.db.insert_one(
-              {
-                "id": ctx.author.id,
-                "name": ctx.author.name,
-                "guildid": ctx.channel.guild,
-                "channelid": ctx.channel.id,
-                "messageid": partnerid,
-              })
+        if partner is None:
+            partner = await self.db.insert_one({"id": "partner"})
 
+        try:
+            partnerid = partner[str(ctx.message.guild.id)]
+        except KeyError:
+            partnerid = partner[str(ctx.message.guild.id)] = []
+
+        if partnerid is None:
+            newpartner = []
         else:
+            newpartner = partnerid.copy()
 
-            embed=discord.Embed(description="You are our partner already ")
-            await ctx.send(embed=embed)
-    
+        newpartner.append({"guildid": ctx.message.guild.id})
+
+    @partner.command()
+    @checks.has_permissions(PermissionLevel.OWNER)
+    async def remove(self, ctx, guild_id:int):
+        """
+        Remove Partner from the server
+        Usage:
+        {prefix}partner remove {guild.id}
+        """
+        if ctx.author.bot:
+            return
+        
+        channel_config = await self.db.find_one({"_id": "config"})
+
+        if channel_config is None:
+            return await ctx.send("There's no configured partner channel.")
+        else:
+            channel = ctx.guild.get_channel(int(channel_config["channel"]))
+        
+        if channel is None:
+            return 
+
+        try:
+            partnerid = partner[str(guild_id.id)]
+        except KeyError:
+            return await ctx.send(f"{guild_id} are not our partner.")
+
+        if partnerid is None:
+            await ctx.send(f"{guild_id} are not our partner.")
+        
+        await self.db.find_one_and_update(
+            {"_id": "partner"}, {"$set": {str(guild_id): []}}
+        )
+
+        await ctx.send(f"Successfully removed partner **{guild_id}**")
+
+
 def setup(bot):
     bot.add_cog(Partner(bot))
