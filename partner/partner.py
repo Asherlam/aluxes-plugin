@@ -54,7 +54,7 @@ class Partner(commands.Cog):
             partner = await self.db.insert_one({"id": "partner"})
 
         try:
-            partnerid = partner[str(ctx.channel.guild.id)]  
+            partnerid = partner[str(ctx.channel.guild.id)]
         except KeyError:
             partnerid = partner[str(ctx.channel.guild.id)] = []
 
