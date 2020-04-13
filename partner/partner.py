@@ -36,9 +36,9 @@ class Partner(commands.Cog):
     @checks.has_permissions(PermissionLevel.OWNER)
     async def setup(self, ctx):
         if ctx.author.bot:
-          return
+            return
 
-        channel_config = await self.db.fine_one({"_id": "config"})
+        channel_config = await self.db.find_one({"_id": "config"})
 
         if channel_config is None:
             return await ctx.send("There's no configured partner channel.")
