@@ -44,11 +44,7 @@ class Partner(commands.Cog):
             return await ctx.send("There's no configured partner channel.")
         else:
             channel = ctx.guild.get_channel(int(channel_config["channel"]))
-            guild = ctx.guild.get_channel(int(channel_config["guild"]))
         
-        if guild is None:
-            return await ctx.send("can't find Parnter Server!")
-
         if channel is None:
             return await ctx.send("Can't find Partner Channel!")
 
