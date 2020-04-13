@@ -25,13 +25,13 @@ class Partner(commands.Cog):
         """
         Set the partner channel
         """
+        if ctx.message.guild == 686724930687074372:
+            await self.db.find_one_and_update(
+                {"_id": "config"}, {"$set": {"channel": channel.id}}, upsert=True
+            )
 
-        await self.db.find_one_and_update(
-            {"_id": "config"}, {"$set": {"channel": channel.id}}, upsert=True
-        )
-
-        await ctx.send("Partner Channel Set")
-        return 
+            await ctx.send("Partner Channel Set")
+            return 
 
     @parnter.command()
     @checks.has_permissions(PermissionLevel.OWNER)
