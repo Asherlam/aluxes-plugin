@@ -29,7 +29,7 @@ class Partner(commands.Cog):
             {"_id": "config"}, {"$set": {"channel": channel.id, "guild": channel.guild.id}}, upsert=True
         )
 
-        await ctx.send("Partner Channel Set")
+        await ctx.send(f"Partner Channel Set {channel.name}")
         return 
 
     @partner.command()
@@ -44,7 +44,11 @@ class Partner(commands.Cog):
             return await ctx.send("There's no configured partner channel.")
         else:
             channel = ctx.guild.get_channel(int(channel_config["channel"]))
+            guild = ctx.guild.get_channel(int(channel_config["guild"]))
         
+        if guild is None:
+            return await ctx.send("can't find Parnter Server!")
+
         if channel is None:
             return await ctx.send("Can't find Partner Channel!")
 
@@ -61,7 +65,7 @@ class Partner(commands.Cog):
         if partnerid is None:
             newpartner = []
         else:
-            newpartner = partnerid.copy()
+            await ctx.send("f{partnerid}")
 
         newpartner.append({"guildid": ctx.message.guild.id})
 
