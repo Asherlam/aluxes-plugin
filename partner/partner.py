@@ -37,6 +37,12 @@ class Partner(commands.Cog):
     async def setup(self, ctx):
         if ctx.author.bot:
             return
+            
+        def cancel_check(msg: discord.Message):
+            if msg.content == "cancel" or msg.content == f"{ctx.prefix}cancel":
+                return True
+            else:
+                return False
 
         channel_config = await self.db.find_one({"_id": "config"})
 
