@@ -26,7 +26,7 @@ class Partner(commands.Cog):
         Set the partner channel
         """
         await self.db.find_one_and_update(
-            {"_id": "config"}, {"$set": {"channel": channel.id}}, upsert=True
+            {"_id": "config"}, {"$set": {"channel": channel.id, "guild": channel.guild}}, upsert=True
         )
 
         await ctx.send("Partner Channel Set")
